@@ -34,5 +34,12 @@ jobs:
 
             - name: Build for Windows
               shell: bash
-              run: make compile-windows
+              run: |
+                  make compile-windows
+                  make pack-windows
 
+            - name: Upload Windows packages
+              uses: actions/upload-artifact@v3
+              with:
+                name: package
+                path: dist/*
