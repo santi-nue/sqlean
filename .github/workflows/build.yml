@@ -28,6 +28,9 @@ jobs:
             - name: Download SQLite sources
               shell: bash
               run: |
+                  echo "${PATH//:/$'\n'}"
+                  gcc --version
+                  which gcc
                   make prepare-dist
                   make download-sqlite
                   make download-external
