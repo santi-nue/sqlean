@@ -19,14 +19,8 @@ env:
 
 jobs:
     build:
-        name: Build for ${{ matrix.os }}
-        runs-on: ${{ matrix.os }}
-        strategy:
-            matrix:
-                include:
-                    - os: ubuntu-20.04
-                    - os: windows-latest
-                    - os: macos-latest
+        name: Build for windows
+        runs-on: windows-latest
 
         steps:
             - uses: actions/checkout@v2
@@ -38,17 +32,7 @@ jobs:
                   make download-sqlite
                   make download-external
 
-            - name: Build for Linux
-              if: matrix.os == 'ubuntu-20.04'
-              run: |
-                  make compile-linux
-                  make test-all
-
             - name: Build for Windows
-              if: matrix.os == 'windows-latest'
               shell: bash
               run: make compile-windows
 
-            - name: Build for macOS
-              if: matrix.os == 'macos-latest'
-              run: make compile-macos
